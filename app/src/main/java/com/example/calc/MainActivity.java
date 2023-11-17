@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else if (v.getId() == R.id.btnDivide) {
                 txtInput.setText(txtInput.getText().toString() + "/");
                 isOperatorClicked = true;
-            } else if (v.getId() == R.id.btnMod) {
-                txtInput.setText(txtInput.getText().toString() + "%");
+            } else if (v.getId() == R.id.btnPow) {
+                txtInput.setText(txtInput.getText().toString() + "^");
                 isOperatorClicked = true;
             } else {
                 isOperatorClicked = false;
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.allClear) {
             txtInput.setText("");
             txtOutput.setText("");
+            nums.clear();
+            operations.clear();
             isOperatorClicked = false;
             System.out.println("All Clear button pressed");
         } else if (v.getId() == R.id.back) {
@@ -102,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.getId() == R.id.btnDot) {
             isOperatorClicked = false;
             txtInput.setText(txtInput.getText().toString() + ".");
+
+
+
         } else if (v.getId()==R.id.btnEquals) {
             if (txtInput.getText().toString()!=""){
                 parseString(txtInput.getText().toString(),nums,operations);
@@ -183,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initializing the buttons
         Button allClear = findViewById(R.id.allClear);
         Button back = findViewById(R.id.back);
-        Button btnMod = findViewById(R.id.btnMod);
+        Button btnMod = findViewById(R.id.btnPow);
         Button btnDivide = findViewById(R.id.btnDivide);
         Button btn7 = findViewById(R.id.btn7);
         Button btn8 = findViewById(R.id.btn8);
