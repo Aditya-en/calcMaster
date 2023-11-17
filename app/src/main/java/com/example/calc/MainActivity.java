@@ -4,218 +4,157 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
-public class MainActivity extends AppCompatActivity
-{
-
-    TextView workingsTV;
-    TextView resultsTV;
-    String workings = "";
-    String formula = "";
-    String tempFormula = "";
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    // Initializing the text boxes
+    TextView txtInput;
+    TextView txtOutput;
+    private boolean isOperatorClicked = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    public void onClick(View v) {
+
+        System.out.println("Button pressed");
+
+        // The logic for operators starts here
+        if (!isOperatorClicked) {
+            if (v.getId() == R.id.btnAdd) {
+                txtInput.setText(txtInput.getText().toString() + "+");
+                isOperatorClicked = true;
+            } else if (v.getId() == R.id.btnMinus) {
+                txtInput.setText(txtInput.getText().toString() + "-");
+                isOperatorClicked = true;
+            } else if (v.getId() == R.id.btnMultiply) {
+                txtInput.setText(txtInput.getText().toString() + "*");
+                isOperatorClicked = true;
+            } else if (v.getId() == R.id.btnDivide) {
+                txtInput.setText(txtInput.getText().toString() + "/");
+                isOperatorClicked = true;
+            } else if (v.getId() == R.id.btnMod) {
+                txtInput.setText(txtInput.getText().toString() + "%");
+                isOperatorClicked = true;
+            } else {
+                isOperatorClicked = false;
+            }
+
+        }
+
+//        if (v.getId() == R.id.btnAdd || v.getId() == R.id.btnMinus || v.getId() == R.id.btnDivide || v.getId() == R.id.btnMultiply || v.getId() == R.id.btnMod) {
+//  //          isOperatorClicked = true;
+//        }
+        // Code for managing backspace and all clear button
+        if (v.getId() == R.id.allClear) {
+            txtInput.setText("");
+            isOperatorClicked = false;
+            System.out.println("All Clear button pressed");
+        } else if (v.getId() == R.id.back) {
+            isOperatorClicked = false;
+            System.out.println("Back button pressed");
+            if (!txtInput.getText().toString().isEmpty())
+                txtInput.setText(txtInput.getText().toString().substring(0, txtInput.getText().toString().length() - 1));
+        }
+
+        //the Code for implementing button presses starts here
+
+        else if (v.getId() == R.id.btn1) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "1");
+        } else if (v.getId() == R.id.btn2) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "2");
+        } else if (v.getId() == R.id.btn3) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "3");
+        } else if (v.getId() == R.id.btn4) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "4");
+        } else if (v.getId() == R.id.btn5) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "5");
+        } else if (v.getId() == R.id.btn6) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "6");
+        } else if (v.getId() == R.id.btn7) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "7");
+        } else if (v.getId() == R.id.btn8) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "8");
+        } else if (v.getId() == R.id.btn9) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "9");
+        } else if (v.getId() == R.id.btn0) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "0");
+        } else if (v.getId() == R.id.btn00) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + "00");
+        } else if (v.getId() == R.id.btnDot) {
+            isOperatorClicked = false;
+            txtInput.setText(txtInput.getText().toString() + ".");
+        }
+
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initTextViews();
-    }
-
-    private void initTextViews()
-    {
-        workingsTV = (TextView)findViewById(R.id.workingsTextView);
-        resultsTV = (TextView)findViewById(R.id.resultTextView);
-    }
-
-    private void setWorkings(String givenValue)
-    {
-        workings = workings + givenValue;
-        workingsTV.setText(workings);
-    }
 
 
-    public void equalsOnClick(View view)
-    {
-        Double result = null;
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
-        checkForPowerOf();
+        // Initializing the buttons
+        Button allClear = findViewById(R.id.allClear);
+        Button back = findViewById(R.id.back);
+        Button btnMod = findViewById(R.id.btnMod);
+        Button btnDivide = findViewById(R.id.btnDivide);
+        Button btn7 = findViewById(R.id.btn7);
+        Button btn8 = findViewById(R.id.btn8);
+        Button btn9 = findViewById(R.id.btn9);
+        Button btnMultiply = findViewById(R.id.btnMultiply);
+        Button btn4 = findViewById(R.id.btn4);
+        Button btn5 = findViewById(R.id.btn5);
+        Button btn6 = findViewById(R.id.btn6);
+        Button btnMinus = findViewById(R.id.btnMinus);
+        Button btn1 = findViewById(R.id.btn1);
+        Button btn2 = findViewById(R.id.btn2);
+        Button btn3 = findViewById(R.id.btn3);
+        Button btnAdd = findViewById(R.id.btnAdd);
+        Button btn00 = findViewById(R.id.btn00);
+        Button btn0 = findViewById(R.id.btn0);
+        Button btnDot = findViewById(R.id.btnDot);
+        Button btnEquals = findViewById(R.id.btnEquals);
 
-        try {
-            result = (double)engine.eval(formula);
-        } catch (ScriptException e)
-        {
-            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
-        }
-
-        if(result != null)
-            resultsTV.setText(String.valueOf(result.doubleValue()));
-
-    }
-
-    private void checkForPowerOf()
-    {
-        ArrayList<Integer> indexOfPowers = new ArrayList<>();
-        for(int i = 0; i < workings.length(); i++)
-        {
-            if (workings.charAt(i) == '^')
-                indexOfPowers.add(i);
-        }
-
-        formula = workings;
-        tempFormula = workings;
-        for(Integer index: indexOfPowers)
-        {
-            changeFormula(index);
-        }
-        formula = tempFormula;
-    }
-
-    private void changeFormula(Integer index)
-    {
-        String numberLeft = "";
-        String numberRight = "";
-
-        for(int i = index + 1; i< workings.length(); i++)
-        {
-            if(isNumeric(workings.charAt(i)))
-                numberRight = numberRight + workings.charAt(i);
-            else
-                break;
-        }
-
-        for(int i = index - 1; i >= 0; i--)
-        {
-            if(isNumeric(workings.charAt(i)))
-                numberLeft = numberLeft + workings.charAt(i);
-            else
-                break;
-        }
-
-        String original = numberLeft + "^" + numberRight;
-        String changed = "Math.pow("+numberLeft+","+numberRight+")";
-        tempFormula = tempFormula.replace(original,changed);
-    }
-
-    private boolean isNumeric(char c)
-    {
-        if((c <= '9' && c >= '0') || c == '.')
-            return true;
-
-        return false;
-    }
+        // Initializing the text boxes
+        txtInput = findViewById(R.id.txtInput);
+        txtOutput = findViewById(R.id.txtOutput);
 
 
-    public void clearOnClick(View view)
-    {
-        workingsTV.setText("");
-        workings = "";
-        resultsTV.setText("");
-        leftBracket = true;
-    }
+        // Setting OnClickListeners
+        allClear.setOnClickListener(this);
+        back.setOnClickListener(this);
+        btnMod.setOnClickListener(this);
+        btnDivide.setOnClickListener(this);
+        btn7.setOnClickListener(this);
+        btn8.setOnClickListener(this);
+        btn9.setOnClickListener(this);
+        btnMultiply.setOnClickListener(this);
+        btn4.setOnClickListener(this);
+        btn5.setOnClickListener(this);
+        btn6.setOnClickListener(this);
+        btnMinus.setOnClickListener(this);
+        btn1.setOnClickListener(this);
+        btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
+        btn00.setOnClickListener(this);
+        btn0.setOnClickListener(this);
+        btnDot.setOnClickListener(this);
+        btnEquals.setOnClickListener(this);
 
-    boolean leftBracket = true;
-
-    public void bracketsOnClick(View view)
-    {
-        if(leftBracket)
-        {
-            setWorkings("(");
-            leftBracket = false;
-        }
-        else
-        {
-            setWorkings(")");
-            leftBracket = true;
-        }
-    }
-
-    public void powerOfOnClick(View view)
-    {
-        setWorkings("^");
-    }
-
-    public void divisionOnClick(View view)
-    {
-        setWorkings("/");
-    }
-
-    public void sevenOnClick(View view)
-    {
-        setWorkings("7");
-    }
-
-    public void eightOnClick(View view)
-    {
-        setWorkings("8");
-    }
-
-    public void nineOnClick(View view)
-    {
-        setWorkings("9");
-    }
-
-    public void timesOnClick(View view)
-    {
-        setWorkings("*");
-    }
-
-    public void fourOnClick(View view)
-    {
-        setWorkings("4");
-    }
-
-    public void fiveOnClick(View view)
-    {
-        setWorkings("5");
-    }
-
-    public void sixOnClick(View view)
-    {
-        setWorkings("6");
-    }
-
-    public void minusOnClick(View view)
-    {
-        setWorkings("-");
-    }
-
-    public void oneOnClick(View view)
-    {
-        setWorkings("1");
-    }
-
-    public void twoOnClick(View view)
-    {
-        setWorkings("2");
-    }
-
-    public void threeOnClick(View view)
-    {
-        setWorkings("3");
-    }
-
-    public void plusOnClick(View view)
-    {
-        setWorkings("+");
-    }
-
-    public void decimalOnClick(View view)
-    {
-        setWorkings(".");
-    }
-
-    public void zeroOnClick(View view)
-    {
-        setWorkings("0");
     }
 
 }
