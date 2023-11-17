@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (txtInput.getText().toString()!=""){
                 parseString(txtInput.getText().toString(),nums,operations);
                 txtOutput.setText(""+newCalc(nums,operations));
+                nums.clear();
+                operations.clear();
                 isOperatorClicked = false;
             }
         }
