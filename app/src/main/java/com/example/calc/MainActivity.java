@@ -7,11 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // Initializing the text boxes
     TextView txtInput;
     TextView txtOutput;
     private boolean isOperatorClicked = false;
+    List<Double> nums = new ArrayList<>();
+    List<Character> operations = new ArrayList<>();
 
     @Override
     public void onClick(View v) {
@@ -44,9 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        if (v.getId() == R.id.btnAdd || v.getId() == R.id.btnMinus || v.getId() == R.id.btnDivide || v.getId() == R.id.btnMultiply || v.getId() == R.id.btnMod) {
 //  //          isOperatorClicked = true;
 //        }
+
+
         // Code for managing backspace and all clear button
         if (v.getId() == R.id.allClear) {
             txtInput.setText("");
+            txtOutput.setText("");
             isOperatorClicked = false;
             System.out.println("All Clear button pressed");
         } else if (v.getId() == R.id.back) {
@@ -94,9 +102,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.getId() == R.id.btnDot) {
             isOperatorClicked = false;
             txtInput.setText(txtInput.getText().toString() + ".");
+        } else if (v.getId()==R.id.btnEquals) {
+            if (txtInput.getText().toString()!=""){
+                parseString(txtInput.getText().toString(),nums,operations);
+                txtOutput.setText(""+newCalc(nums,operations));
+                isOperatorClicked = false;
+            }
         }
 
 
+    }
+    public static void parseString(String input, List<Double> nums, List<Character> operations) {
+        // Split the input string into tokens based on operators (+, -, *, /)
+        String[] tokens = input.split("[\\+\\-\\*\\/\\^]");
+
+        // Iterate through the tokens
+        for (String token : tokens) {
+            // Convert the token to an integer and add it to the nums list
+            nums.add(Double.parseDouble(token));
+        }
+
+        // Iterate through the characters in the original string
+        for (char ch : input.toCharArray()) {
+            // Check if the character is an operator and add it to the operations list
+            if (isOperator(ch)) {
+                operations.add(ch);
+            }
+        }
+    }
+    public static boolean isOperator(char ch) {
+        // Check if the character is one of the supported operators (+, -, *, /)
+        return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
+    }
+
+    // This function handles the calculation
+    public static Double newCalc(List<Double> nums, List<Character> operations) {
+        char[] operPreced = {'^', '/', '*', '+', '-' };
+
+        for (char ch : operPreced) {
+            for (int i = 0; i < operations.size(); i++) {
+                if (operations.get(i) == ch) {
+                    Double result=nums.get(i);
+                    // Preform calculation
+                    if (ch == '^') {
+                        result = Math.pow(nums.get(i), nums.get(i + 1));
+                        // nums.set(i, Math.pow(nums.get(i), nums.get(i+1)));
+
+                    } else if (ch == '/') {
+                        result = nums.get(i) / nums.get(i + 1);
+
+                    } else if (ch == '*') {
+                        result = nums.get(i) * nums.get(i + 1);
+
+                    } else if (ch == '+') {
+                        result = nums.get(i) + nums.get(i + 1);
+
+                    } else if (ch == '-') {
+                        result = nums.get(i) - nums.get(i + 1);
+
+                    }
+                    nums.set(i, result);
+                    nums.remove(i + 1);
+                    operations.remove(i);
+                    i--;
+
+                }
+            }
+        }
+        Double result=nums.get(0);
+        return result;
     }
 
 
