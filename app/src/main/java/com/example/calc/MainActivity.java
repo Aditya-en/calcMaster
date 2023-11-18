@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-//        if (v.getId() == R.id.btnAdd || v.getId() == R.id.btnMinus || v.getId() == R.id.btnDivide || v.getId() == R.id.btnMultiply || v.getId() == R.id.btnMod) {
-//  //          isOperatorClicked = true;
-//        }
-
 
         // Code for managing backspace and all clear button
         if (v.getId() == R.id.allClear) {
@@ -125,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Iterate through the tokens
         for (String token : tokens) {
-            // Convert the token to an integer and add it to the nums list
             nums.add(Double.parseDouble(token));
         }
 
@@ -153,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Preform calculation
                     if (ch == '^') {
                         result = Math.pow(nums.get(i), nums.get(i + 1));
-                        // nums.set(i, Math.pow(nums.get(i), nums.get(i+1)));
 
                     } else if (ch == '/') {
                         result = nums.get(i) / nums.get(i + 1);
