@@ -107,10 +107,10 @@ public class Converter extends AppCompatActivity {
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, units);
 
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        spinner.setAdapter(adapter);
+        spinner1.setAdapter(adapter1);
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
