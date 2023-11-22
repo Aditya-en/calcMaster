@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".Converter"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="DuplicateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

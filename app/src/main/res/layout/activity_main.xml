@@ -59,7 +59,8 @@
                 style="@style/buttons"
                 app:icon="@drawable/backspace_24"
                 android:backgroundTint="@color/lightOrange"
-                app:iconSize="35sp"/>
+                app:iconSize="35sp"
+                android:text="^"/>
             <Button
                 android:id="@+id/btnPow"
                 style="@style/btn"
