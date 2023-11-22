@@ -131,7 +131,93 @@ public class Converter extends AppCompatActivity {
             } else if (toUnit.equals("feet")) {
                 result = value * 3.28084; // 1 m = 3.28084 feet
             }
+        }else if (fromUnit.equals("cm")) {
+        // Perform conversion from m to other units
+        if (toUnit.equals("km")) {
+            result = value / 100000; // 1 m = 0.00001 km
+        } else if (toUnit.equals("cm")) {
+            result = value * 1; // 1 cm = 1 cm
+        }else if (toUnit.equals("m")) {
+            result = value / 100; // 1 cm = .01 m
+        }else if (toUnit.equals("mm")) {
+            result = value * 10; // 1 cm = 10 mm
+        } else if (toUnit.equals("yard")) {
+            result = value / 91.44; // 1 cm = 0.0109361 yard
+        } else if (toUnit.equals("inches")) {
+            result = value / 2.54; // 1 cm = .3933701 inches
+        } else if (toUnit.equals("feet")) {
+            result = value / 30.48; // 1 cm = .0328084 feet
         }
+    } else if (fromUnit.equals("inches")) {
+        // Perform conversion from m to other units
+        if (toUnit.equals("km")) {
+            result = value / 393370; // 1 inch approx to 2.5e^-5 km
+        } else if (toUnit.equals("m")) {
+            result = value / 39.37; // 1 inch =.0254 m
+        } else if (toUnit.equals("mm")) {
+            result = value * 25.4; // 1 inch = 25.4 mm
+        } else if (toUnit.equals("cm")) {
+            result = value * 2.54; // 1 inch =2.54 cm
+        } else if (toUnit.equals("yard")) {
+            result = value / 36; // 1 inch = .0277778 yard
+        } else if (toUnit.equals("inches")) {
+            result = value * 1; // 1 inch = 1inches
+        } else if (toUnit.equals("feet")) {
+            result = value / 12; // 1 inch = .083333 feet
+        }
+    }else if (fromUnit.equals("yard")) {
+        // Perform conversion from m to other units
+        if (toUnit.equals("km")) {
+            result = value / 1094; // 1 yard approx to 0.0009144km
+        } else if (toUnit.equals("m")) {
+            result = value /1.094; // 1 yard =.9144 m
+        } else if (toUnit.equals("mm")) {
+            result = value * 914.4 ; // 1 yard = 914.4 mm
+        } else if (toUnit.equals("cm")) {
+            result = value * 91.44; // 1 yard =91.44 cm
+        } else if (toUnit.equals("yard")) {
+            result = value * 1; // 1 yard = 1 yard
+        } else if (toUnit.equals("inches")) {
+            result = value *36; // 1 yard = 36 inches
+        } else if (toUnit.equals("feet")) {
+            result = value * 3 ; // 1 yard = 3 feet
+        }
+    }else if (fromUnit.equals("feet")) {
+        // Perform conversion from m to other units
+        if (toUnit.equals("km")) {
+            result = value / 3281; // 1 yard feet to 0.0003048 km
+        } else if (toUnit.equals("m")) {
+            result = value / 3.281; // 1 feet =.3048 m
+        } else if (toUnit.equals("mm")) {
+            result = value * 304.8; // 1 feet = 304.8 mm
+        } else if (toUnit.equals("cm")) {
+            result = value * 30.48; // 1 feet =30.48cm
+        } else if (toUnit.equals("yard")) {
+            result = value * 3; // 1 feet = .3333 yard
+        } else if (toUnit.equals("inches")) {
+            result = value * 12; // 1 feet = 12 inches
+        } else if (toUnit.equals("feet")) {
+            result = value * 1; // 1 feet =1  feet
+        }
+    }else if (fromUnit.equals("mm")) {
+        // Perform conversion from m to other units
+        if (toUnit.equals("km")) {
+            result = value / 1000000; // 1 m = 0.000001 km
+        } else if (toUnit.equals("cm")) {
+            result = value / 10; // 1 mm = .1 cm
+        } else if (toUnit.equals("m")) {
+            result = value / 1000; // 1 mm = .001 m
+        } else if (toUnit.equals("mm")) {
+            result = value * 1; // 1 mm = 1 mm
+        } else if (toUnit.equals("yard")) {
+            result = value / 914.4; // 1 mm=0.00109361 yard
+        } else if (toUnit.equals("inches")) {
+            result = value / 25.4; // 1 mm = .03933701 inches
+        } else if (toUnit.equals("feet")) {
+            result = value / 304.8; // 1 mm = .00328084 feet
+        }
+    }
+
         // Add similar blocks for other units (litre, ml, kg, grams) as needed
 
         return result;
