@@ -230,6 +230,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDot.setOnClickListener(this);
         btnEquals.setOnClickListener(this);
 
+        // Setting Swipe listeners
+
     }
 
 }
