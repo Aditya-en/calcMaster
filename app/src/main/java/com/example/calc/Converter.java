@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +31,9 @@ public class Converter extends AppCompatActivity {
         toSpinner = findViewById(R.id.spinner2);
         convertButton = findViewById(R.id.convertButton);
 
-        // Define the units arrays
-        final String[] lengthUnits = {"km", "m", "cm", "mm", "yard", "inches", "feet","kg", "grams","ton",
-                "litre","ml","celsius","fahrenheit","kelvin"};
+
+        final String[] lengthUnits = {"km", "m", "cm", "mm", "yard", "inches", "feet","kg", "gram","tonne",
+                "litre","ml","m^3","cm^3","celsius","fahrenheit","kelvin"};
 
         // Create ArrayAdapter for the spinners
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,lengthUnits);
@@ -40,12 +41,12 @@ public class Converter extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        // Set adapters for spinners
+
 
         fromSpinner.setAdapter(adapter);
         toSpinner.setAdapter(adapter);
 
-        // Set item selected listeners for spinners
+
         fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -70,7 +71,6 @@ public class Converter extends AppCompatActivity {
             }
         });
 
-        // Set click listener for the convert button
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,31 +81,30 @@ public class Converter extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void performConversion() {
-        // Get user input and selected units
+
         double inputValue;
         try {
             inputValue = Double.parseDouble(inputEditText.getText().toString());
         } catch (NumberFormatException e) {
-            resultEditText.setText("Invalid Input");
+            resultEditText.setText("Output");
             return;
         }
         String fromUnit = fromSpinner.getSelectedItem().toString();
         String toUnit = toSpinner.getSelectedItem().toString();
 
-        // Perform conversion based on units
+
         double result = convert(fromUnit, toUnit, inputValue);
 
-        // Display the result in the resultEditText
+
         resultEditText.setText(String.valueOf(result));
     }
 
     private double convert(String fromUnit, String toUnit, double value) {
-        // Conversion logic for different units
-        // Add your conversion logic here
-        double result = value; // Default: return the input value
+
+        double result = value;
 
         if (fromUnit.equals("km")) {
-            // Perform conversion from km to other units
+
             if (toUnit.equals("m")) {
                 result = value * 1000; // 1 km = 1000 m
             } else if (toUnit.equals("cm")) {
@@ -118,9 +117,16 @@ public class Converter extends AppCompatActivity {
                 result = value * 39370.1; // 1 km = 39370.1 inches
             } else if (toUnit.equals("feet")) {
                 result = value * 3280.84; // 1 km = 3280.84 feet
+            } else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
+
+
+
+
         } else if (fromUnit.equals("m")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 1000; // 1 m = 0.001 km
             } else if (toUnit.equals("cm")) {
@@ -133,10 +139,13 @@ public class Converter extends AppCompatActivity {
                 result = value * 39.3701; // 1 m = 39.3701 inches
             } else if (toUnit.equals("feet")) {
                 result = value * 3.28084; // 1 m = 3.28084 feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
 
         }else if (fromUnit.equals("cm")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 100000; // 1 m = 0.00001 km
             } else if (toUnit.equals("cm")) {
@@ -151,9 +160,12 @@ public class Converter extends AppCompatActivity {
                 result = value / 2.54; // 1 cm = .3933701 inches
             } else if (toUnit.equals("feet")) {
                 result = value / 30.48; // 1 cm = .0328084 feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         } else if (fromUnit.equals("inches")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 393370; // 1 inch approx to 2.5e^-5 km
             } else if (toUnit.equals("m")) {
@@ -168,9 +180,12 @@ public class Converter extends AppCompatActivity {
                 result = value * 1; // 1 inch = 1inches
             } else if (toUnit.equals("feet")) {
                 result = value / 12; // 1 inch = .083333 feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         }else if (fromUnit.equals("yard")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 1094; // 1 yard approx to 0.0009144km
             } else if (toUnit.equals("m")) {
@@ -185,9 +200,12 @@ public class Converter extends AppCompatActivity {
                 result = value *36; // 1 yard = 36 inches
             } else if (toUnit.equals("feet")) {
                 result = value * 3 ; // 1 yard = 3 feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         }else if (fromUnit.equals("feet")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 3281; // 1 yard feet to 0.0003048 km
             } else if (toUnit.equals("m")) {
@@ -202,9 +220,12 @@ public class Converter extends AppCompatActivity {
                 result = value * 12; // 1 feet = 12 inches
             } else if (toUnit.equals("feet")) {
                 result = value * 1; // 1 feet =1  feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         }else if (fromUnit.equals("mm")) {
-            // Perform conversion from m to other units
+
             if (toUnit.equals("km")) {
                 result = value / 1000000; // 1 m = 0.000001 km
             } else if (toUnit.equals("cm")) {
@@ -219,13 +240,16 @@ public class Converter extends AppCompatActivity {
                 result = value / 25.4; // 1 mm = .03933701 inches
             } else if (toUnit.equals("feet")) {
                 result = value / 304.8; // 1 mm = .00328084 feet
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         } else if (fromUnit.equals("kg")) {
             // Perform conversion from m to other units
             if (toUnit.equals("kg")) {
                 result = value *1;
             }
-            if (toUnit.equals("gm")) {
+            if (toUnit.equals("gram")) {
                 result = value * 1000;
             }
             if (toUnit.equals("tonne")) {
@@ -233,8 +257,7 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("pound")) {
                 result = value * 2.205;
-            }
-        } else if (fromUnit.equals("grams")) {
+            }        } else if (fromUnit.equals("gram")) {
             // Perform conversion from m to other units
             if (toUnit.equals("gram")) {
                 result = value*1;
@@ -247,6 +270,9 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("pound")) {
                 result = value / 453.6;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
 
         } else if (fromUnit.equals("tonne")) {
@@ -257,7 +283,7 @@ public class Converter extends AppCompatActivity {
             if (toUnit.equals("kg")) {
                 result = value * 1000;
             }
-            if (toUnit.equals("grams")) {
+            if (toUnit.equals("gram")) {
                 result = value * 1000000;
             }
             if (toUnit.equals("pound")) {
@@ -273,19 +299,56 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("tonne")) {
                 result = value / 2205;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
-            if (toUnit.equals("grams")) {
-                result = value * 453.6;
-            }
+
+
+
         } else if (fromUnit.equals("litre")) {
             // Perform conversion from m to other units
             if (toUnit.equals("litre")) {
-                result = value*1;
+                result = value * 1;
             }
             if (toUnit.equals("ml")) {
                 result = value * 1000;
             }
-        }else if (fromUnit.equals("celsius")) {
+            if (toUnit.equals("m^3")) {
+                result = value / 1000;
+            }
+            if (toUnit.equals("cm^3")) {
+                result = value / 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        }else if (fromUnit.equals("ml")) {
+            // Perform conversion from m to other units
+            if (toUnit.equals("ml")) {
+                result = value * 1;
+            }
+            if (toUnit.equals("litre")) {
+                result = value * 1000;
+            }
+            if (toUnit.equals("m^3")) {
+                result = value / 1000000;
+            }
+            if (toUnit.equals("cm^3")) {
+                result = value / 1000000000;
+            }if (toUnit.equals("m^3")) {
+                result = value / 1000;
+            }
+            if (toUnit.equals("cm^3")) {
+                result = value / 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
+            }
+
+        } else if (fromUnit.equals("celsius")) {
             // Perform conversion from m to other units
             if (toUnit.equals("celsius")) {
                 result = value* 1;
@@ -295,6 +358,14 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("kelvin")) {
                 result = value + 273.15;
+            }if (toUnit.equals("m^3")) {
+                result = value /0;
+            }
+            if (toUnit.equals("cm^3")) {
+                result = value / 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         } else if (fromUnit.equals("fahrenheit")) {
             // Perform conversion from m to other units
@@ -306,8 +377,13 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("celsius")) {
                 result = value * .555555 - 32 * .555555 + 237.15;
+            }if (toUnit.equals("cm^3")) {
+                result = value / 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
 
             }
+
         } else if (fromUnit.equals("kelvin")) {
             // Perform conversion from m to other units
             if (toUnit.equals("kelvin")) {
@@ -318,12 +394,49 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("fahrenheit")) {
                 result = value * 1.8 - 273.15 * 1.8 + 32;
+            }if (toUnit.equals("cm^3")) {
+                result = value / 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
+            }
+        }else if (fromUnit.equals("m^3")) {
+            // Perform conversion from m to other units
+            if (toUnit.equals("m^3")) {
+                result = value * 1;
+            }
+            if (toUnit.equals("ml")) {
+                result = value /1000000;
+            }
+            if (toUnit.equals("litre")) {
+                result = value * 1000;
+            }
+            if (toUnit.equals("cm^3")) {
+                result = value * 1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
+            }
+        }else if (fromUnit.equals("cm^3")) {
+            // Perform conversion from m to other units
+            if (toUnit.equals("cm^3")) {
+                result = value * 1;
+            }
+            if (toUnit.equals("ml")) {
+                result = value *1;
+            }
+            if (toUnit.equals("litre")) {
+                result = value/ 1000;
+            }
+            if (toUnit.equals("m^3")) {
+                result = value /1000000;
+            }else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
             }
         }
 
 
-
-        // Add similar blocks for other units (litre, ml, kg, grams) as needed
 
         return result;
     }
