@@ -2,6 +2,7 @@ package com.example.calc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // Initializing the buttons
+        Button convertButton = findViewById(R.id.convertButton);
         Button allClear = findViewById(R.id.allClear);
         Button back = findViewById(R.id.back);
         Button btnMod = findViewById(R.id.btnPow);
@@ -236,7 +238,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnDot.setOnClickListener(this);
         btnEquals.setOnClickListener(this);
 
-        // Setting Swipe listeners
+        // Setting Converter Launcher
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Converter.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

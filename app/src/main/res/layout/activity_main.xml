@@ -19,6 +19,16 @@
         app:layout_constraintBottom_toTopOf="@+id/txtOutput"
         tools:layout_editor_absoluteX="-16dp" />
 
+    <Button
+        android:id="@+id/convertButton"
+        style="@style/buttons"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:icon="@drawable/baseline_change_circle_24"
+        android:tint="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtOutput"
         android:layout_width="match_parent"
@@ -60,7 +70,7 @@
                 app:icon="@drawable/backspace_24"
                 android:backgroundTint="@color/lightOrange"
                 app:iconSize="35sp"
-                android:text="^"/>
+                />
             <Button
                 android:id="@+id/btnPow"
                 style="@style/btn"
