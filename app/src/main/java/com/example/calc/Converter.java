@@ -42,9 +42,22 @@ public class Converter extends AppCompatActivity {
 
 
 
+        // Set adapters for spinners
+        if (fromSpinner!=null){
+            fromSpinner.setAdapter(adapter);
+        }
+        if (toSpinner!=null){
+            toSpinner.setAdapter(adapter);
+        }
 
-        fromSpinner.setAdapter(adapter);
-        toSpinner.setAdapter(adapter);
+
+
+
+
+
+        // Set item selected listeners for spinners
+        if (fromSpinner!=null){
+
 
 
         fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -58,7 +71,8 @@ public class Converter extends AppCompatActivity {
 
             }
         });
-
+        }
+        if (toSpinner!=null){
         toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -70,6 +84,7 @@ public class Converter extends AppCompatActivity {
                 // Do nothing here
             }
         });
+        }
 
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +96,11 @@ public class Converter extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void performConversion() {
+        // Get user input and selected units
+        double inputValue=0;
+        try {if (inputEditText!=null){
+            inputValue = Double.parseDouble(inputEditText.getText().toString());}
+
 
         double inputValue;
         try {
@@ -89,11 +109,24 @@ public class Converter extends AppCompatActivity {
             resultEditText.setText("Output");
             return;
         }
-        String fromUnit = fromSpinner.getSelectedItem().toString();
-        String toUnit = toSpinner.getSelectedItem().toString();
+        String fromUnit="";
+        if (fromSpinner!=null){
+            fromUnit = fromSpinner.getSelectedItem().toString();
+        }
+        String toUnit="";
+        if (toSpinner!=null){
+            toUnit = toSpinner.getSelectedItem().toString();
+        }
 
 
         double result = convert(fromUnit, toUnit, inputValue);
+
+
+        // Display the result in the resultEditText
+        if (resultEditText!=null){
+            resultEditText.setText(String.valueOf(result));
+        }
+
 
 
         resultEditText.setText(String.valueOf(result));

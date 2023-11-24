@@ -2,6 +2,7 @@ package com.example.calc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+
+//        if (v.getId() == R.id.btnAdd || v.getId() == R.id.btnMinus || v.getId() == R.id.btnDivide || v.getId() == R.id.btnMultiply || v.getId() == R.id.btnMod) {
+//  //          isOperatorClicked = true;
+//        }
 
 
         // Code for managing backspace and all clear button
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Iterate through the tokens
         for (String token : tokens) {
+            // Convert the token to an integer and add it to the nums list
             nums.add(Double.parseDouble(token));
         }
 
@@ -148,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // Preform calculation
                     if (ch == '^') {
                         result = Math.pow(nums.get(i), nums.get(i + 1));
+                        // nums.set(i, Math.pow(nums.get(i), nums.get(i+1)));
 
                     } else if (ch == '/') {
                         result = nums.get(i) / nums.get(i + 1);
@@ -182,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // Initializing the buttons
+        Button convertButton = findViewById(R.id.convertButton);
         Button allClear = findViewById(R.id.allClear);
         Button back = findViewById(R.id.back);
         Button btnMod = findViewById(R.id.btnPow);
@@ -229,6 +237,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn0.setOnClickListener(this);
         btnDot.setOnClickListener(this);
         btnEquals.setOnClickListener(this);
+
+        // Setting Converter Launcher
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Converter.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
