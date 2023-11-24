@@ -1,5 +1,6 @@
 package com.example.calc;
 
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class Converter extends AppCompatActivity {
 
@@ -23,8 +25,7 @@ public class Converter extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_converter);
         inputEditText = findViewById(R.id.editTextNumberDecimal);
         resultEditText = findViewById(R.id.editTextText2);
         fromSpinner = findViewById(R.id.spinner);
@@ -42,22 +43,9 @@ public class Converter extends AppCompatActivity {
 
 
 
-        // Set adapters for spinners
-        if (fromSpinner!=null){
-            fromSpinner.setAdapter(adapter);
-        }
-        if (toSpinner!=null){
-            toSpinner.setAdapter(adapter);
-        }
 
-
-
-
-
-
-        // Set item selected listeners for spinners
-        if (fromSpinner!=null){
-
+        fromSpinner.setAdapter(adapter);
+        toSpinner.setAdapter(adapter);
 
 
         fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -71,8 +59,7 @@ public class Converter extends AppCompatActivity {
 
             }
         });
-        }
-        if (toSpinner!=null){
+
         toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -84,7 +71,6 @@ public class Converter extends AppCompatActivity {
                 // Do nothing here
             }
         });
-        }
 
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +82,6 @@ public class Converter extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void performConversion() {
-        // Get user input and selected units
-        double inputValue=0;
-        try {if (inputEditText!=null){
-            inputValue = Double.parseDouble(inputEditText.getText().toString());}
-
 
         double inputValue;
         try {
@@ -109,24 +90,11 @@ public class Converter extends AppCompatActivity {
             resultEditText.setText("Output");
             return;
         }
-        String fromUnit="";
-        if (fromSpinner!=null){
-            fromUnit = fromSpinner.getSelectedItem().toString();
-        }
-        String toUnit="";
-        if (toSpinner!=null){
-            toUnit = toSpinner.getSelectedItem().toString();
-        }
+        String fromUnit = fromSpinner.getSelectedItem().toString();
+        String toUnit = toSpinner.getSelectedItem().toString();
 
 
         double result = convert(fromUnit, toUnit, inputValue);
-
-
-        // Display the result in the resultEditText
-        if (resultEditText!=null){
-            resultEditText.setText(String.valueOf(result));
-        }
-
 
 
         resultEditText.setText(String.valueOf(result));
@@ -137,7 +105,7 @@ public class Converter extends AppCompatActivity {
         double result = value;
 
         if (fromUnit.equals("km")) {
-
+            // Perform conversion from km to other units
             if (toUnit.equals("m")) {
                 result = value * 1000; // 1 km = 1000 m
             } else if (toUnit.equals("cm")) {
@@ -159,7 +127,7 @@ public class Converter extends AppCompatActivity {
 
 
         } else if (fromUnit.equals("m")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 1000; // 1 m = 0.001 km
             } else if (toUnit.equals("cm")) {
@@ -178,7 +146,7 @@ public class Converter extends AppCompatActivity {
             }
 
         }else if (fromUnit.equals("cm")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 100000; // 1 m = 0.00001 km
             } else if (toUnit.equals("cm")) {
@@ -198,7 +166,7 @@ public class Converter extends AppCompatActivity {
 
             }
         } else if (fromUnit.equals("inches")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 393370; // 1 inch approx to 2.5e^-5 km
             } else if (toUnit.equals("m")) {
@@ -218,7 +186,7 @@ public class Converter extends AppCompatActivity {
 
             }
         }else if (fromUnit.equals("yard")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 1094; // 1 yard approx to 0.0009144km
             } else if (toUnit.equals("m")) {
@@ -238,7 +206,7 @@ public class Converter extends AppCompatActivity {
 
             }
         }else if (fromUnit.equals("feet")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 3281; // 1 yard feet to 0.0003048 km
             } else if (toUnit.equals("m")) {
@@ -258,7 +226,7 @@ public class Converter extends AppCompatActivity {
 
             }
         }else if (fromUnit.equals("mm")) {
-
+            // Perform conversion from m to other units
             if (toUnit.equals("km")) {
                 result = value / 1000000; // 1 m = 0.000001 km
             } else if (toUnit.equals("cm")) {
@@ -290,8 +258,12 @@ public class Converter extends AppCompatActivity {
             }
             if (toUnit.equals("pound")) {
                 result = value * 2.205;
-            }        } else if (fromUnit.equals("gram")) {
-            // Perform conversion from m to other units
+            }   else {
+                Toast.makeText(this, "Choose valid conversion units", Toast.LENGTH_SHORT).show();
+
+            }
+        } else if (fromUnit.equals("gram")) {
+
             if (toUnit.equals("gram")) {
                 result = value*1;
             }
