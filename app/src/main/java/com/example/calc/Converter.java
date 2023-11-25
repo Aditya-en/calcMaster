@@ -88,6 +88,7 @@ public class Converter extends AppCompatActivity {
             inputValue = Double.parseDouble(inputEditText.getText().toString());
         } catch (NumberFormatException e) {
             resultEditText.setText("Output");
+            resultEditText.setFocusable(false);
             return;
         }
         String fromUnit = fromSpinner.getSelectedItem().toString();
@@ -98,6 +99,7 @@ public class Converter extends AppCompatActivity {
 
 
         resultEditText.setText(String.valueOf(result));
+        resultEditText.setFocusable(false);
     }
 
     private double convert(String fromUnit, String toUnit, double value) {
