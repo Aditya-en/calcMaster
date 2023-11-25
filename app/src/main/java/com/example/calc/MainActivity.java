@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,13 +109,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else if (v.getId()==R.id.btnEquals) {
-            if (txtInput.getText().toString()!=""){
-                parseString(txtInput.getText().toString(),nums,operations);
-                txtOutput.setText(""+newCalc(nums,operations));
-                nums.clear();
-                operations.clear();
-                isOperatorClicked = false;
+            try {
+                if (txtInput.getText().toString()!=""){
+                    parseString(txtInput.getText().toString(),nums,operations);
+                    txtOutput.setText(""+newCalc(nums,operations));
+                    nums.clear();
+                    operations.clear();
+                    isOperatorClicked = false;
+                }
+            }catch (Exception e){
+                Toast.makeText(this, "Enter a valid input.", Toast.LENGTH_SHORT).show();
             }
+
         }
 
 
