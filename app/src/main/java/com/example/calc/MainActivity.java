@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }catch (Exception e){
                 Toast.makeText(this, "Enter a valid input.", Toast.LENGTH_SHORT).show();
+                nums.clear();
+                operations.clear();
             }
 
         }

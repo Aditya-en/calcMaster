@@ -70,13 +70,14 @@
                 android:id="@+id/allClear"
                 style="@style/btn"
                 android:text="C"/>
+
             <Button
                 android:id="@+id/back"
                 style="@style/buttons"
-                app:icon="@drawable/backspace_24"
                 android:backgroundTint="@color/lightOrange"
+                app:icon="@drawable/backspace_24"
                 app:iconSize="35sp"
-                />
+                app:iconTint="#FFFFFF" />
             <Button
                 android:id="@+id/btnPow"
                 style="@style/btn"
